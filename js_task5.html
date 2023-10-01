@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript task 1</title>
+    <style>
+        body {
+            background-color: rgb(146, 146, 232);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            text-align: left;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 0.5rem;
+            margin-left: 0;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        .highlight {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="myForm">
+        <label for="fname">Full name:</label>
+        <input type="text" id="fname" name="fname" value="" />
+        <div id="fnameError" class="error"></div>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" value="" />
+        <div id="emailError" class="error"></div>
+
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" value="" />
+        <div id="messageError" class="error"></div>
+
+        <label for="website">Website:</label>
+        <input type="text" id="website" name="website" value="" />
+        <div id="websiteError" class="error"></div>
+
+        <button type="button" onclick="validateForm()">Save</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            var form = document.getElementById('myForm');
+            var elements = form.elements;
+
+            for (var i = 0; i < elements.length - 1; i++) {
+                var currentElement = elements[i];
+                var errorId = currentElement.id + 'Error';
+                var errorElement = document.getElementById(errorId);
+
+                if (currentElement.value.trim() === '') {
+                    if (!errorElement) {
+                        errorElement = document.createElement('div');
+                        errorElement.id = errorId;
+                        errorElement.className = 'error';
+                        currentElement.classList.add('highlight');
+                        currentElement.parentNode.appendChild(errorElement);
+                    }
+                    errorElement.innerHTML = 'This field is required.';
+                } else {
+                    if (errorElement) {
+                      
+                        errorElement.innerHTML = '';
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
